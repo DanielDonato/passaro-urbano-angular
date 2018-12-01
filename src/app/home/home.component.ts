@@ -25,6 +25,5 @@ export class HomeComponent implements OnInit {
       .catch((obj: any) => {
         console.log(obj);
     });
-
   }
 }

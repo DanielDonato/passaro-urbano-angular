@@ -1,6 +1,9 @@
 import { Oferta } from './shared/oferta.model'
+import {Http} from '@angular/http';
 
 export class OfertasService {
+    
+    constructor(){ }
 
     public ofertas: Oferta[] = [
         {
@@ -53,8 +56,6 @@ export class OfertasService {
         }
     ]
 
-    constructor(){ }
-
     public getOfertas():Oferta[] {
         return this.ofertas;
     }
@@ -83,5 +84,4 @@ export class OfertasService {
             return ofertas;
         });
     }
-
 }
