@@ -1,27 +1,30 @@
 import { Oferta } from './shared/oferta.model'
 import {Injectable} from '@angular/core'
 import {Http} from '@angular/http';
+import {URL_API} from "./app.api";
 
 @Injectable()
 export class OfertasService {
+
+    private urlApi = `${URL_API}/ofertas`;
     
     constructor(private http:Http){ }
 
     public getOfertas():Promise<Oferta[]> {
         // efetuar uma requisição http e retornar um promisse contendo um Array de ofertas
-        return this.http.get('http://localhost:3000/ofertas?destaque=true')
+        return this.http.get(`${this.urlApi}?destaque=true`)
                 .toPromise()
                 .then((resposta:any) => resposta.json());
     }
 
     public getOfertasPorCategoria(categoria:String): Promise<Oferta[]>{
-        return this.http.get(`http://localhost:3000/ofertas?categoria=${categoria}`)
+        return this.http.get(`${this.urlApi}?categoria=${categoria}`)
             .toPromise()
             .then((resposta:any) => resposta.json());
     }
 
     public getOfertaPorId(id:number):Promise<Oferta>{
-        return this.http.get(`http://localhost:3000/ofertas?id=${id}`)
+        return this.http.get(`${this.urlApi}?id=${id}`)
             .toPromise()
             .then((resposta:any) => resposta.json()[0]);
     }
