@@ -2,7 +2,6 @@ import { Oferta } from './shared/oferta.model'
 import {Injectable} from '@angular/core'
 import {Http} from '@angular/http';
 
-
 @Injectable()
 export class OfertasService {
     
@@ -19,6 +18,12 @@ export class OfertasService {
         return this.http.get(`http://localhost:3000/ofertas?categoria=${categoria}`)
             .toPromise()
             .then((resposta:any) => resposta.json());
+    }
+
+    public getOfertaPorId(id:number):Promise<Oferta>{
+        return this.http.get(`http://localhost:3000/ofertas?id=${id}`)
+            .toPromise()
+            .then((resposta:any) => resposta.json()[0]);
     }
 
     /*public getOfertas2(): Promise<Oferta[]>{
