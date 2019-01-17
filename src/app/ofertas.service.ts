@@ -1,9 +1,9 @@
 import { Oferta } from './shared/oferta.model'
 import {Injectable} from '@angular/core'
-import {Http} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import {URL_API} from "./app.api";
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
 
 @Injectable()
 export class OfertasService {
@@ -16,38 +16,38 @@ export class OfertasService {
         // efetuar uma requisição http e retornar um promisse contendo um Array de ofertas
         return this.http.get(`${URL_API}/ofertas?destaque=true`)
                 .toPromise()
-                .then((resposta:any) => resposta.json());
+                .then((resposta: Response) => resposta.json());
     }
 
     public getOfertasPorCategoria(categoria:String): Promise<Oferta[]>{
         return this.http.get(`${URL_API}/ofertas?categoria=${categoria}`)
             .toPromise()
-            .then((resposta:any) => resposta.json());
+            .then((resposta: Response) => resposta.json());
     }
 
     public getOfertaPorId(id:number):Promise<Oferta>{
         return this.http.get(`${URL_API}/ofertas?id=${id}`)
             .toPromise()
-            .then((resposta:any) => resposta.json()[0]);
+            .then((resposta: Response) => resposta.json()[0]);
     }
 
     public getComoUsarOfertaPorId(id:number): Promise<string>{
         return this.http.get(`${URL_API}/como-usar?id=${id}`).toPromise()
-            .then((resposta:any) => {
+            .then((resposta: Response) => {
                 return resposta.json()[0].descricao;
         })
     }
 
     public getOndeFicaOfertaPorId(id:number):Promise<string>{
         return this.http.get(`${URL_API}/onde-fica?id=${id}`).toPromise()
-            .then((resposta:any) => {
+            .then((resposta: Response) => {
                 return resposta.json()[0].descricao;
             })
     }
 
     public pesquisaOfertas(termo: string): Observable<Oferta[]>{
-        return this.http.get(`${URL_API}/ofertas?descricao_oferta=${termo}`)
-        .pipe(map((resposta: any) => resposta.json()));
+        return this.http.get(`${URL_API}/ofertas?descricao_oferta_like=${termo}`)
+        .pipe(map((resposta: Response) => resposta.json()), retry(10));
     }
 
     /*public getOfertas2(): Promise<Oferta[]>{
