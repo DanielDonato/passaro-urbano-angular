@@ -40,4 +40,8 @@ export class TopoComponent implements OnInit {
     this.subjectPesquisa.next(termoDaBusca) //parametro passado aqui é recebido no switchMap
   }
 
+  public limpaPesquisa(): void{
+    this.subjectPesquisa.next('')
+  }
+
 }
