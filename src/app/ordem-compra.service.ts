@@ -12,14 +12,14 @@ export class OrdemCompraService {
 
     private urlString = `${URL_API}/pedidos`
 
-    public efetivarCompra(pedido: Pedido): Observable<any>{
+    public efetivarCompra(pedido: Pedido): Observable<number>{
         let headers: Headers = new Headers();
         headers.append('Content-type', 'application/json');
         return this.http.post(
             this.urlString,
             JSON.stringify(pedido),
             new RequestOptions({headers: headers})
-        ).pipe(map((resposta: Response) => console.log(resposta.json())))
+        ).pipe(map((resposta: Response) => resposta.json().id) );
         
     }
 }
