@@ -79,6 +79,7 @@ export class OrdemCompraComponent implements OnInit {
   public confirmarCompra(): void{
     let pedido: Pedido = new Pedido(this.endereco, this.numero, this.complemento, this.formaPagamento);
     this.ordemCompraSerivce.efetivarCompra(pedido)
+      .subscribe();
   }
 
 }
