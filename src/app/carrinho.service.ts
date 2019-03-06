@@ -24,6 +24,28 @@ class CarrinhoService {
         }
         console.log(this.itens);
     }
+
+  public totalCarrinhoCompra(): number {
+    let total: number = 0;
+    this.itens.map((item: ItemCarrinho) => {
+        total += (item.valor * item.quantidade);
+    });
+    return total;
+  }
+
+  public adicionarQuantidade(itenCarrinho: ItemCarrinho): void {
+    const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itenCarrinho.id);
+    if (itemCarrinhoEncontrado) {
+        itemCarrinhoEncontrado.quantidade++;
+    }
+  }
+
+  public removerQuantidade(itenCarrinho: ItemCarrinho): void {
+    const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itenCarrinho.id);
+    if (itemCarrinhoEncontrado) {
+        itemCarrinhoEncontrado.quantidade--;
+    }
+  }
 }
 
 export { CarrinhoService };
