@@ -16,8 +16,14 @@ class CarrinhoService {
             oferta.descricao_oferta,
             oferta.valor,
             1);
-        this.itens.push(itemCarrinho);
-   }
+        const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itemCarrinho.id);
+        if (itemCarrinhoEncontrado) {
+            itemCarrinhoEncontrado.quantidade++;
+        } else {
+            this.itens.push(itemCarrinho);
+        }
+        console.log(this.itens);
+    }
 }
 
 export { CarrinhoService };
