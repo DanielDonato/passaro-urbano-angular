@@ -44,6 +44,9 @@ class CarrinhoService {
     const itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.id === itenCarrinho.id);
     if (itemCarrinhoEncontrado) {
         itemCarrinhoEncontrado.quantidade--;
+        if (itemCarrinhoEncontrado.quantidade === 0) {
+            this.itens.splice(this.itens.indexOf(itemCarrinhoEncontrado), 1);
+        }
     }
   }
 }
