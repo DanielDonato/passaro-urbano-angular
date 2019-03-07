@@ -43,7 +43,8 @@ export class OrdemCompraComponent implements OnInit {
       } else {
       const pedido: Pedido = new Pedido(
           this.formulario.value.endereco, this.formulario.value.numero,
-          this.formulario.value.complemento, this.formulario.value.formaPagamento
+          this.formulario.value.complemento, this.formulario.value.formaPagamento,
+          this.carrinhoService.exibirItens()
          );
       this.ordemCompraService.efetivarCompra(pedido)
         .subscribe((idPedido: number) => {
